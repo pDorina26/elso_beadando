@@ -1,7 +1,7 @@
-name: Unit Tests
+name: Unit and Integration Tests
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
@@ -11,14 +11,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: '3.8'
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install unittest
+
     - name: Run unit tests
       run: |
-        python -m unittest discover -s . -p 'unit_test.py'
+        python -m unittest discover -s unit_test -p "*.py" 
+
+    - name: Run integration tests
+      run: |
+        python -m unittest discover -s integration_test -p "*.py"  
