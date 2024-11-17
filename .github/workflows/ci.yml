@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   test:
@@ -20,9 +20,7 @@ jobs:
         python-version: '3.8'
 
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      run: python -m pip install --upgrade pip
 
     - name: Run Unit Tests
       run: |
@@ -31,3 +29,4 @@ jobs:
     - name: Run Integration Tests
       run: |
         python -m unittest discover -s tests -p "integration_test.py"
+
